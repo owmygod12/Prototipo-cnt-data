@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferência de Dados - Seções Temáticas</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --btn-teal: #00a884;
+            --btn-blue: #0f4c75;
+            --btn-download-bg: #1a5c83;
+            --border-color: #e2e8f0;
+            --font-family: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* Bloco de Categoria / Seção Temática */
+        .category-block {
+            margin-bottom: 50px;
+        }
+
+        .category-header {
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--btn-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 70px;
+            height: 2px;
+            background-color: var(--btn-teal);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* Card Anatomia */
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e1;
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            height: 180px;
+            width: 100%;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-image-wrapper img {
+            transform: scale(1.03);
+        }
+
+        .btn-download-overlay {
+            position: absolute;
+            bottom: 12px;
+            left: 15px;
+            background-color: var(--btn-download-bg);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .btn-download-overlay:hover {
+            background-color: #103c57;
+        }
+
+        .card-body {
+            padding: 22px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Modal / Popup Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(2px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 420px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #f8fafc;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .btn-close:hover {
+            color: var(--text-dark);
+        }
+
+        .modal-body {
+            padding: 28px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .btn-modal {
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            font-family: var(--font-family);
+        }
+
+        .btn-primary {
+            background-color: var(--btn-teal);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #008265;
+            box-shadow: 0 4px 12px rgba(0, 168, 132, 0.25);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--btn-blue);
+            border: 2px solid var(--btn-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(15, 76, 117, 0.06);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                margin: 24px auto 60px;
+                padding: 0 16px;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-title {
+                font-size: 17px;
+            }
+        }
+    </style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">DQE552HZKRU7-222601502-201348</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">db0fdbd9-9d12-4974-9cb6-c32facc3a394</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://sestsenat.sharepoint.com/sites/CNT_DIEX_GEP/_layouts/15/DocIdRedir.aspx?ID=DQE552HZKRU7-222601502-201348, DQE552HZKRU7-222601502-201348</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+
+    <!-- Container Principal com Blocos Temáticos -->
+    <main class="container">
+        
+        <!-- Bloco 1: Modo Dutoviário, Aéreo e Aquaviário -->
+        <section class="category-block">
+            <header class="category-header">
+                <h2 class="category-title">
+                    <i class="fa-solid fa-layer-group" style="font-size: 17px;"></i>
+                    Modo Dutoviário, Aéreo e Aquaviário
+                </h2>
+            </header>
+
+            <div class="content-grid">
+                
+                <!-- Card 1: Mineroduto -->
+                <article class="card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=600&q=80" alt="Mineroduto">
+                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Mineroduto</h3>
+                        <p class="card-desc">Camada geográfica que representa a infraestrutura do transporte dutoviário, contemplando oleodutos, minerodutos e gasodutos destinados ao transporte de petróleo e derivados, minérios e gás natural.</p>
+                    </div>
+                </article>
+
+                <!-- Card 2: Aeroportos -->
+                <article class="card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Aeroportos">
+                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Aeroportos</h3>
+                        <p class="card-desc">Camada que contém os Aeródromos Concedidos, públicos e privados registrados na ANAC.</p>
+                    </div>
+                </article>
+
+                <!-- Card 3: Cabotagem -->
+                <article class="card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=600&q=80" alt="Cabotagem">
+                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Cabotagem</h3>
+                        <p class="card-desc">Arquivo vetorial, do tipo linha e tem o objetivo de ilustrar a localização da via de transporte por cabotagem no Brasil.</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Bloco 2: Modo Ferroviário e Hidroviário -->
+        <section class="category-block">
+            <header class="category-header">
+                <h2 class="category-title">
+                    <i class="fa-solid fa-train-subway" style="font-size: 17px;"></i>
+                    Modo Ferroviário e Hidroviário
+                </h2>
+            </header>
+
+            <div class="content-grid">
+                
+                <!-- Card 4: Concessões Ferroviárias – ANTT -->
+                <article class="card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80" alt="Concessões Ferroviárias – ANTT">
+                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Concessões Ferroviárias – ANTT</h3>
+                        <p class="card-desc">Camada contendo as ferrovias concedidas brasileiras sob regulação e fiscalização da ANTT.</p>
+                    </div>
+                </article>
+
+                <!-- Card 5: Eclusas -->
+                <article class="card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="Eclusas">
+                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Eclusas</h3>
+                        <p class="card-desc">Camada de Eclusas proveniente de um dado vetorial da ANTAQ e posteriormente especializado.</p>
+                    </div>
+                </article>
+
+                <!-- Card 6: Entre Pátios -->
+                <article class="card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c663be?auto=format&fit=crop&w=600&q=80" alt="Entre Pátios">
+                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Entre Pátios</h3>
+                        <p class="card-desc">Camada de Entre Pátios da Declaração de Rede – ANTT que representa a Malha Ferroviária Concedida Brasileira.</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal de Download -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal-content" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title">Opções de Acesso ao Dataset</h2>
+                <button class="btn-close" id="closeModalBtn" aria-label="Fechar Modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button class="btn-modal btn-primary">
+                    <i class="fa-solid fa-file-csv"></i> Baixar CSV
+                </button>
+                <button class="btn-modal btn-secondary">
+                    <i class="fa-solid fa-code"></i> Consultar API
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Vanilla -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('downloadModal');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const downloadButtons = document.querySelectorAll('.btn-download-overlay');
+
+            // Abrir Modal
+            const openModal = () => {
+                modal.classList.add('active');
+                setTimeout(() => {
+                    closeBtn.focus();
+                }, 100);
+            };
+
+            // Fechar Modal
+            const closeModal = () => {
+                modal.classList.remove('active');
+            };
+
+            // Evento para todos os botões de Download em qualquer categoria/bloco
+            downloadButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal();
+                });
+            });
+
+            // Fechar no 'X'
+            closeBtn.addEventListener('click', closeModal);
+
+            // Fechar ao clicar no backdrop (overlay)
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Fechar na tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
