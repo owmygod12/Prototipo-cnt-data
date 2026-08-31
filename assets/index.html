@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transferência de Dados - Seções Temáticas</title>
+    <title>Painel de Datasets - Transporte</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,10 +38,41 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Cabeçalho Geral da Página */
+        .main-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 32px 0 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .main-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--btn-blue);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .main-title-divider {
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--btn-blue) 0%, var(--btn-teal) 40%, transparent 100%);
+            border-radius: 2px;
+        }
+
         /* Container Principal */
         .container {
             max-width: 1200px;
-            margin: 40px auto 80px;
+            margin: 0 auto 80px;
             padding: 0 20px;
         }
 
@@ -66,7 +97,9 @@
             color: var(--btn-blue);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .category-header::after {
@@ -79,7 +112,7 @@
             background-color: var(--btn-teal);
         }
 
-        /* Content Grid */
+        /* Content Grid (Estrito de 3 colunas por bloco) */
         .content-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -90,10 +123,10 @@
         .card {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
             display: flex;
             flex-direction: column;
             text-decoration: none;
@@ -106,24 +139,29 @@
             border-color: #cbd5e1;
         }
 
+        /* Imagens padronizadas */
         .card-image-wrapper {
             position: relative;
             height: 180px;
             width: 100%;
             background-color: #e2e8f0;
             overflow: hidden;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
         }
 
         .card-image-wrapper img {
             width: 100%;
             height: 180px;
             object-fit: cover;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
             display: block;
             transition: transform 0.3s ease;
         }
 
         .card:hover .card-image-wrapper img {
-            transform: scale(1.03);
+            transform: scale(1.04);
         }
 
         .btn-download-overlay {
@@ -137,7 +175,7 @@
             padding: 6px 14px;
             border-radius: 4px;
             text-decoration: none;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s ease, transform 0.15s ease;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
             cursor: pointer;
             border: none;
@@ -145,10 +183,12 @@
             align-items: center;
             gap: 6px;
             z-index: 2;
+            font-family: var(--font-family);
         }
 
         .btn-download-overlay:hover {
             background-color: #103c57;
+            transform: translateY(-1px);
         }
 
         .card-body {
@@ -164,6 +204,7 @@
             color: var(--text-dark);
             margin-bottom: 10px;
             line-height: 1.4;
+            text-transform: uppercase;
         }
 
         .card-desc {
@@ -178,14 +219,14 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(3px);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
         .modal-overlay.active {
@@ -197,7 +238,7 @@
             background-color: #ffffff;
             border-radius: 12px;
             width: 90%;
-            max-width: 420px;
+            max-width: 440px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             transform: translateY(-20px);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -229,7 +270,7 @@
             font-size: 20px;
             color: #94a3b8;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -244,7 +285,7 @@
             padding: 28px 25px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
         }
 
         .btn-modal {
@@ -255,7 +296,7 @@
             text-align: center;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -275,6 +316,14 @@
             box-shadow: 0 4px 12px rgba(0, 168, 132, 0.25);
         }
 
+        .secondary-action-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
         .btn-secondary {
             background-color: transparent;
             color: var(--btn-blue);
@@ -285,6 +334,14 @@
             background-color: rgba(15, 76, 117, 0.06);
         }
 
+        .base-identifier-text {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+            text-align: center;
+            word-break: break-all;
+        }
+
         /* Responsividade */
         @media (max-width: 992px) {
             .content-grid {
@@ -293,8 +350,15 @@
         }
 
         @media (max-width: 640px) {
+            .main-header {
+                padding: 24px 0 16px;
+                margin-bottom: 28px;
+            }
+            .main-title {
+                font-size: 24px;
+            }
             .container {
-                margin: 24px auto 60px;
+                margin: 0 auto 60px;
                 padding: 0 16px;
             }
             .content-grid {
@@ -316,115 +380,221 @@
 </head>
 <body>
 
+    <!-- Cabeçalho Geral da Página -->
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="main-title">TRANSPORTE</h1>
+            <div class="main-title-divider"></div>
+        </div>
+    </header>
+
     <!-- Container Principal com Blocos Temáticos -->
     <main class="container">
         
-        <!-- Bloco 1: Modo Dutoviário, Aéreo e Aquaviário -->
+        <!-- Bloco 1: RODOVIÁRIO -->
         <section class="category-block">
             <header class="category-header">
                 <h2 class="category-title">
-                    <i class="fa-solid fa-layer-group" style="font-size: 17px;"></i>
-                    Modo Dutoviário, Aéreo e Aquaviário
+                    <i class="fa-solid fa-road"></i>
+                    RODOVIÁRIO
                 </h2>
             </header>
 
             <div class="content-grid">
                 
-                <!-- Card 1: Mineroduto -->
-                <article class="card">
+                <!-- Card 1: CONDUTORES -->
+                <article class="card" data-base-name="modal_rodoviario_condutores">
                     <div class="card-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=600&q=80" alt="Mineroduto">
-                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&auto=format&fit=crop&q=80" alt="CONDUTORES">
+                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_condutores" aria-label="Baixar Dataset">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Mineroduto</h3>
-                        <p class="card-desc">Camada geográfica que representa a infraestrutura do transporte dutoviário, contemplando oleodutos, minerodutos e gasodutos destinados ao transporte de petróleo e derivados, minérios e gás natural.</p>
+                        <h3 class="card-title">CONDUTORES</h3>
+                        <p class="card-desc">Dados estatísticos e quantitativos sobre condutores habilitados por categoria, faixa etária e distribuição geográfica nacional.</p>
                     </div>
                 </article>
 
-                <!-- Card 2: Aeroportos -->
-                <article class="card">
+                <!-- Card 2: FROTA -->
+                <article class="card" data-base-name="modal_rodoviario_frota">
                     <div class="card-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Aeroportos">
-                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&auto=format&fit=crop&q=80" alt="FROTA">
+                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_frota" aria-label="Baixar Dataset">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Aeroportos</h3>
-                        <p class="card-desc">Camada que contém os Aeródromos Concedidos, públicos e privados registrados na ANAC.</p>
+                        <h3 class="card-title">FROTA</h3>
+                        <p class="card-desc">Quantitativo e perfil da frota de veículos automotores registrados, segmentados por tipo, ano e município.</p>
                     </div>
                 </article>
 
-                <!-- Card 3: Cabotagem -->
-                <article class="card">
+                <!-- Card 3: PRODUÇÃO, LICENCIAMENTO E EXPORTAÇÃO -->
+                <article class="card" data-base-name="modal_rodoviario_prd_lic_exp">
                     <div class="card-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=600&q=80" alt="Cabotagem">
-                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80" alt="PRODUÇÃO, LICENCIAMENTO E EXPORTAÇÃO">
+                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_prd_lic_exp" aria-label="Baixar Dataset">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Cabotagem</h3>
-                        <p class="card-desc">Arquivo vetorial, do tipo linha e tem o objetivo de ilustrar a localização da via de transporte por cabotagem no Brasil.</p>
+                        <h3 class="card-title">PRODUÇÃO, LICENCIAMENTO E EXPORTAÇÃO</h3>
+                        <p class="card-desc">Indicadores econômicos da indústria automotiva relativos à produção física, volume de licenciamentos e balança comercial de veículos.</p>
+                    </div>
+                </article>
+
+                <!-- Card 4: EXTENSÃO DE MALHA RODOVIÁRIA -->
+                <article class="card" data-base-name="vw_snv_completo">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?w=600&auto=format&fit=crop&q=80" alt="EXTENSÃO DE MALHA RODOVIÁRIA">
+                        <button class="btn-download-overlay" data-base-name="vw_snv_completo" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">EXTENSÃO DE MALHA RODOVIÁRIA</h3>
+                        <p class="card-desc">Dados georreferenciados e tabulares da infraestrutura do Sistema Nacional de Viação (SNV), cobrindo trechos federais e estaduais.</p>
+                    </div>
+                </article>
+
+                <!-- Card 5: ACIDENTES -->
+                <article class="card" data-base-name="modal_rodoviario_acidentes_fato_vw">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&auto=format&fit=crop&q=80" alt="ACIDENTES">
+                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_acidentes_fato_vw" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">ACIDENTES</h3>
+                        <p class="card-desc">Registros e indicadores de sinistros de trânsito em rodovias, contemplando gravidade, causas prováveis e vítimas.</p>
                     </div>
                 </article>
 
             </div>
         </section>
 
-        <!-- Bloco 2: Modo Ferroviário e Hidroviário -->
+        <!-- Bloco 2: FERROVIÁRIO -->
         <section class="category-block">
             <header class="category-header">
                 <h2 class="category-title">
-                    <i class="fa-solid fa-train-subway" style="font-size: 17px;"></i>
-                    Modo Ferroviário e Hidroviário
+                    <i class="fa-solid fa-train-subway"></i>
+                    FERROVIÁRIO
                 </h2>
             </header>
 
             <div class="content-grid">
                 
-                <!-- Card 4: Concessões Ferroviárias – ANTT -->
-                <article class="card">
+                <!-- Card 1: ACIDENTES -->
+                <article class="card" data-base-name="modal_ferroviario_acidentes">
                     <div class="card-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80" alt="Concessões Ferroviárias – ANTT">
-                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=600&auto=format&fit=crop&q=80" alt="ACIDENTES">
+                        <button class="btn-download-overlay" data-base-name="modal_ferroviario_acidentes" aria-label="Baixar Dataset">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Concessões Ferroviárias – ANTT</h3>
-                        <p class="card-desc">Camada contendo as ferrovias concedidas brasileiras sob regulação e fiscalização da ANTT.</p>
+                        <h3 class="card-title">ACIDENTES</h3>
+                        <p class="card-desc">Ocorrências e registros de segurança operacional na malha ferroviária concedida e sob regulação técnica.</p>
                     </div>
                 </article>
 
-                <!-- Card 5: Eclusas -->
-                <article class="card">
+                <!-- Card 2: MOVIMENTAÇÃO DE CARGAS -->
+                <article class="card" data-base-name="modal_ferroviario_movimentacao">
                     <div class="card-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="Eclusas">
-                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                        <img src="https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?w=600&auto=format&fit=crop&q=80" alt="MOVIMENTAÇÃO DE CARGAS">
+                        <button class="btn-download-overlay" data-base-name="modal_ferroviario_movimentacao" aria-label="Baixar Dataset">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Eclusas</h3>
-                        <p class="card-desc">Camada de Eclusas proveniente de um dado vetorial da ANTAQ e posteriormente especializado.</p>
+                        <h3 class="card-title">MOVIMENTAÇÃO DE CARGAS</h3>
+                        <p class="card-desc">Volume transportado em toneladas úteis (TU) e tonelada-quilômetro útil (TKU) por operador ferroviário e produto.</p>
                     </div>
                 </article>
 
-                <!-- Card 6: Entre Pátios -->
-                <article class="card">
+            </div>
+        </section>
+
+        <!-- Bloco 3: AEROVIÁRIO -->
+        <section class="category-block">
+            <header class="category-header">
+                <h2 class="category-title">
+                    <i class="fa-solid fa-plane"></i>
+                    AEROVIÁRIO
+                </h2>
+            </header>
+
+            <div class="content-grid">
+                
+                <!-- Card 1: MOVIMENTAÇÃO DE CARGAS E PASSAGEIROS -->
+                <article class="card" data-base-name="modal_aeroviario_dados_estatisticos">
                     <div class="card-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c663be?auto=format&fit=crop&w=600&q=80" alt="Entre Pátios">
-                        <button class="btn-download-overlay" aria-label="Baixar Dataset">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&auto=format&fit=crop&q=80" alt="MOVIMENTAÇÃO DE CARGAS E PASSAGEIROS">
+                        <button class="btn-download-overlay" data-base-name="modal_aeroviario_dados_estatisticos" aria-label="Baixar Dataset">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Entre Pátios</h3>
-                        <p class="card-desc">Camada de Entre Pátios da Declaração de Rede – ANTT que representa a Malha Ferroviária Concedida Brasileira.</p>
+                        <h3 class="card-title">MOVIMENTAÇÃO DE CARGAS E PASSAGEIROS</h3>
+                        <p class="card-desc">Histórico e fluxo estatístico de embarque/desembarque de passageiros e tonelagem de carga aérea em aeródromos nacionais.</p>
+                    </div>
+                </article>
+
+                <!-- Card 2: ACIDENTES -->
+                <article class="card" data-base-name="modal_aeroviario_ocorrencias_aereas">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1520437358207-323b43b50729?w=600&auto=format&fit=crop&q=80" alt="ACIDENTES">
+                        <button class="btn-download-overlay" data-base-name="modal_aeroviario_ocorrencias_aereas" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">ACIDENTES</h3>
+                        <p class="card-desc">Dados de investigações, incidentes graves e ocorrências de segurança na aviação civil brasileira.</p>
+                    </div>
+                </article>
+
+                <!-- Card 3: FROTA -->
+                <article class="card" data-base-name="modal_aeroviario_frota_aeronaves">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&auto=format&fit=crop&q=80" alt="FROTA">
+                        <button class="btn-download-overlay" data-base-name="modal_aeroviario_frota_aeronaves" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">FROTA</h3>
+                        <p class="card-desc">Relação do Registro Aeronáutico Brasileiro (RAB), cobrindo operadores, tipo de homologação e modelos em operação.</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Bloco 4: AQUAVIÁRIO -->
+        <section class="category-block">
+            <header class="category-header">
+                <h2 class="category-title">
+                    <i class="fa-solid fa-ship"></i>
+                    AQUAVIÁRIO
+                </h2>
+            </header>
+
+            <div class="content-grid">
+                
+                <!-- Card 1: MOVIMENTAÇÃO DE CARGAS -->
+                <article class="card" data-base-name="modal_aquaviario_movimentacao">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&auto=format&fit=crop&q=80" alt="MOVIMENTAÇÃO DE CARGAS">
+                        <button class="btn-download-overlay" data-base-name="modal_aquaviario_movimentacao" aria-label="Baixar Dataset">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">MOVIMENTAÇÃO DE CARGAS</h3>
+                        <p class="card-desc">Operações portuárias, navegação de cabotagem e longo curso com indicadores de movimentação de granéis e contêineres.</p>
                     </div>
                 </article>
 
@@ -446,9 +616,12 @@
                 <button class="btn-modal btn-primary">
                     <i class="fa-solid fa-file-csv"></i> Baixar CSV
                 </button>
-                <button class="btn-modal btn-secondary">
-                    <i class="fa-solid fa-code"></i> Consultar API
-                </button>
+                <div class="secondary-action-block">
+                    <button class="btn-modal btn-secondary">
+                        <i class="fa-solid fa-code"></i> Consultar API
+                    </button>
+                    <p class="base-identifier-text" id="modalBaseIdentifier">Base: modal_rodoviario_condutores</p>
+                </div>
             </div>
         </div>
     </div>
@@ -459,9 +632,13 @@
             const modal = document.getElementById('downloadModal');
             const closeBtn = document.getElementById('closeModalBtn');
             const downloadButtons = document.querySelectorAll('.btn-download-overlay');
+            const modalBaseIdentifier = document.getElementById('modalBaseIdentifier');
 
-            // Abrir Modal
-            const openModal = () => {
+            // Abrir Modal e atualizar dinamicamente o nome da base técnica
+            const openModal = (baseName) => {
+                if (modalBaseIdentifier && baseName) {
+                    modalBaseIdentifier.textContent = `Base: ${baseName}`;
+                }
                 modal.classList.add('active');
                 setTimeout(() => {
                     closeBtn.focus();
@@ -477,7 +654,8 @@
             downloadButtons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    openModal();
+                    const baseName = btn.getAttribute('data-base-name') || btn.closest('.card')?.getAttribute('data-base-name');
+                    openModal(baseName);
                 });
             });
 
