@@ -949,94 +949,40 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Campo</th>
-                                    <th>Tipo</th>
-                                    <th>Descrição</th>
-                                    <th>Exemplo</th>
+                                    <th>NOME DO CAMPO</th>
+                                    <th>TIPO DE DADO</th>
+                                    <th>DESCRIÇÃO</th>
+                                    <th>EXEMPLO</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>data</td>
-                                    <td>DATA</td>
-                                    <td>Data de referência dos dados, indicando o ano ao qual a quantidade de condutores se refere.</td>
-                                    <td>01/12/2011</td>
+                                    <td>DATE</td>
+                                    <td>Data de referência dos dados, indicando o período ao qual os valores de produção se referem.</td>
+                                    <td>01/11/2001</td>
                                 </tr>
                                 <tr>
-                                    <td>uf</td>
-                                    <td>TEXTO</td>
-                                    <td>Sigla da Unidade Federativa (UF) associada ao registro, composta por duas letras.</td>
-                                    <td>AC</td>
+                                    <td>veiculo</td>
+                                    <td>STRING</td>
+                                    <td>Tipo ou categoria de veículo à qual o dado de produção está associado.</td>
+                                    <td>Automóveis</td>
                                 </tr>
                                 <tr>
-                                    <td>uf_habilitacao_atual</td>
-                                    <td>TEXTO</td>
-                                    <td>Nome do estado correspondente à UF de habilitação atual do condutor.</td>
-                                    <td>São Paulo</td>
+                                    <td>descricao</td>
+                                    <td>STRING</td>
+                                    <td>Descrição do tipo de operação ou indicador representado no registro (Produção, exportação ou licenciamento).</td>
+                                    <td>Exportação</td>
                                 </tr>
                                 <tr>
-                                    <td>estado_maps</td>
-                                    <td>TEXTO</td>
-                                    <td>Nome do estado sem acento correspondente à UF de habilitação atual do condutor.</td>
-                                    <td>Sao Paulo</td>
+                                    <td>producao</td>
+                                    <td>INTEGER</td>
+                                    <td>Quantidade produzida de veículos para a combinação de período, tipo de veículo e descrição especificada.</td>
+                                    <td>28/12/1941</td>
                                 </tr>
                                 <tr>
-                                    <td>regiao_habilitacao_atual</td>
-                                    <td>TEXTO</td>
-                                    <td>Região geográfica do Brasil à qual pertence o estado de habilitação atual do condutor.</td>
-                                    <td>Norte</td>
-                                </tr>
-                                <tr>
-                                    <td>sexo</td>
-                                    <td>TEXTO</td>
-                                    <td>Sexo informado pelo condutor.</td>
-                                    <td>Feminino</td>
-                                </tr>
-                                <tr>
-                                    <td>faixa_etaria</td>
-                                    <td>TEXTO</td>
-                                    <td>Faixa de idade na qual o condutor está classificado.</td>
-                                    <td>26 a 30</td>
-                                </tr>
-                                <tr>
-                                    <td>categoria</td>
-                                    <td>TEXTO</td>
-                                    <td>Categoria da habilitação do condutor, combinada com a descrição da atividade ou tipo de veículo associado.</td>
-                                    <td>C-Condutor Caminhão</td>
-                                </tr>
-                                <tr>
-                                    <td>categoria2</td>
-                                    <td>TEXTO</td>
-                                    <td>Sigla da categoria da Carteira Nacional de Habilitação (CNH) do condutor.</td>
-                                    <td>C</td>
-                                </tr>
-                                <tr>
-                                    <td>categoria3</td>
-                                    <td>TEXTO</td>
-                                    <td>Descrição simplificada da categoria de habilitação ou da atividade correspondente.</td>
-                                    <td>Condutor Caminhão</td>
-                                </tr>
-                                <tr>
-                                    <td>condutores</td>
-                                    <td>DECIMAL</td>
-                                    <td>Quantidade de condutores contabilizados para as características e o período especificados no registro.</td>
-                                    <td>1.0</td>
-                                </tr>
-                                <tr>
-                                    <td>faixa_ordem</td>
-                                    <td>INTEIRO</td>
-                                    <td>Número utilizado para estabelecer a ordem de apresentação das faixas etárias, permitindo sua organização cronológica ou sequencial.</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>categoria4</td>
-                                    <td>TEXTO</td>
-                                    <td>Classificação padronizada da categoria da CNH, utilizada para agrupamentos e análises.</td>
-                                    <td>C</td>
-                                </tr>
-                                <tr>
-                                    <td>data_de_atualizacao</td>
-                                    <td>DATA</td>
+                                    <td>data_atualizacao</td>
+                                    <td>DATE</td>
                                     <td>Data em que os dados foram atualizados pela última vez.</td>
                                     <td>01/09/2026</td>
                                 </tr>
