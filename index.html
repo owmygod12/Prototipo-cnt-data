@@ -713,7 +713,7 @@
                 <article class="card" data-base-name="modal_rodoviario_condutores">
                     <div class="card-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&auto=format&fit=crop&q=80" alt="CONDUTORES">
-                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_condutores" aria-label="Baixar Dataset" data-excel-url="https://storage.googleapis.com/cnt-publico/CONDUTORES.xlsx" data-bq-url="https://console.cloud.google.com/bigquery?sq=832346300562:caf8cffeece8428680647618c75e4e86">
+                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_condutores" aria-label="Baixar Dataset" data-excel-url="https://storage.googleapis.com/cnt-publico/CONDUTORES.xlsx" data-bq-url="https://console.cloud.google.com/bigquery?sq=832346300562:caf8cffeece8428680647618c75e4e86" data-dict-url="https://storage.googleapis.com/cnt-publico/dicionario_condutores.png">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
@@ -825,7 +825,7 @@
                 <article class="card" data-base-name="modal_rodoviario_frota">
                     <div class="card-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&auto=format&fit=crop&q=80" alt="FROTA">
-                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_frota" aria-label="Baixar Dataset" data-excel-url="https://storage.googleapis.com/cnt-publico/FROTA.xlsx" data-bq-url="https://console.cloud.google.com/bigquery?sq=832346300562:86e88572dc6241f2a56a6c5e01b478e4">
+                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_frota" aria-label="Baixar Dataset" data-excel-url="https://storage.googleapis.com/cnt-publico/FROTA.xlsx" data-bq-url="https://console.cloud.google.com/bigquery?sq=832346300562:86e88572dc6241f2a56a6c5e01b478e4" data-dict-url="https://storage.googleapis.com/cnt-publico/dicionario_frota.png">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
@@ -937,7 +937,7 @@
                 <article class="card" data-base-name="modal_rodoviario_prd_lic_exp">
                     <div class="card-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80" alt="PRODUÇÃO, LICENCIAMENTO E EXPORTAÇÃO">
-                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_prd_lic_exp" aria-label="Baixar Dataset" data-excel-url="https://storage.googleapis.com/cnt-publico/PRODUCAO_LICENCIAMENTO_EXPORTACAO.xlsx" data-bq-url="https://console.cloud.google.com/bigquery?sq=832346300562:2c445d21a31d4fec9061712066748b13">
+                        <button class="btn-download-overlay" data-base-name="modal_rodoviario_prd_lic_exp" aria-label="Baixar Dataset" data-excel-url="https://storage.googleapis.com/cnt-publico/PRODUCAO_LICENCIAMENTO_EXPORTACAO.xlsx" data-bq-url="https://console.cloud.google.com/bigquery?sq=832346300562:2c445d21a31d4fec9061712066748b13" data-dict-url="https://storage.googleapis.com/cnt-publico/dicionario_prd_lic_exp.png">
                             <i class="fa-solid fa-download"></i> Download
                         </button>
                     </div>
@@ -1959,7 +1959,7 @@
                 <div class="modal-view-dictionary" style="display: none;">
                     <div class="dict-header">
                         <button class="btn-modal btn-back-dict"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
-                        <a href="#" id="modalDictExcelBtn" class="btn-modal btn-primary btn-download-dict">Download</a>
+                        <a href="#" id="modalDictExcelBtn" class="btn-modal btn-primary btn-download-dict" target="_blank" download>Download</a>
                     </div>
                     <div class="dict-content" id="dynamicDictContent"></div>
                 </div>
@@ -1982,7 +1982,7 @@
             const modalContent = document.querySelector('.modal-content');
 
             // Abrir Modal e atualizar dinamicamente o nome da base técnica
-            const openModal = (baseName, dictionaryHtml, excelUrl, bqUrl) => {
+            const openModal = (baseName, dictionaryHtml, excelUrl, bqUrl, dictUrl) => {
                 if (modalBaseIdentifier && baseName) {
                     modalBaseIdentifier.textContent = `Base: ${baseName}`;
                 }
@@ -1996,7 +1996,7 @@
                 const dictExcelBtn = document.getElementById('modalDictExcelBtn');
                 
                 if (excelBtn) excelBtn.href = excelUrl || '#';
-                if (dictExcelBtn) dictExcelBtn.href = excelUrl || '#';
+                if (dictExcelBtn) dictExcelBtn.href = dictUrl || '#';
                 
                 if (bqBtn) {
                     if (bqUrl && bqUrl !== '#') {
@@ -2040,8 +2040,9 @@
                     const dictHtml = dictData ? dictData.innerHTML : '<p>Dicionário indisponível.</p>';
                     const excelUrl = btn.getAttribute('data-excel-url');
                     const bqUrl = btn.getAttribute('data-bq-url');
+                    const dictUrl = btn.getAttribute('data-dict-url');
                     
-                    openModal(baseName, dictHtml, excelUrl, bqUrl);
+                    openModal(baseName, dictHtml, excelUrl, bqUrl, dictUrl);
                 });
             });
 
