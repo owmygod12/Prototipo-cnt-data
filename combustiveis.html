@@ -530,9 +530,43 @@
             padding-bottom: 10px;
         }
 
+        /* Tabela do Dicionário de Dados */
+        .dict-content table th, .dict-content table td {
+            padding: 12px 16px !important;
+            text-align: left;
+        }
+        .dict-content table tbody tr {
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+        .dict-content table th:nth-child(3), .dict-content table td:nth-child(3) {
+            width: 60% !important;
+        }
+
+        /* Header do Dicionário de Dados */
+        .dict-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .dict-header .btn-back-dict {
+            margin-bottom: 0;
+        }
+        .dict-header .dict-title {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .dict-header .btn-download-dict {
+            width: auto;
+            padding: 8px 16px;
+        }
+
         .modal-content.expanded {
             width: 70vw;
-            max-width: 900px;
+            max-width: 1200px;
             max-height: 80vh;
         }
 
@@ -1164,20 +1198,22 @@
             </div>
             <div class="modal-body">
                 <div class="modal-view-actions">
+                    <button class="btn-modal btn-dictionary">
+                        <i class="fa-solid fa-book"></i> Dicionário de Dados
+                    </button>
                     <a href="https://data.cnt.org.br" class="btn-modal btn-primary" download>
-                        <i class="fa-solid fa-file-csv"></i> Baixar CSV
+                        <i class="fa-solid fa-file-csv"></i> Baixar Excel
                     </a>
                     <a href="https://data.cnt.org.br" class="btn-modal btn-secondary" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-code"></i> Consultar BigQuery
                     </a>
-                    <button class="btn-modal btn-dictionary">
-                        <i class="fa-solid fa-book"></i> Dicionário de Dados
-                    </button>
-                    <p class="base-identifier-text" id="modalBaseIdentifier">Base: dataset</p>
                 </div>
                 <div class="modal-view-dictionary" style="display: none;">
-                    <button class="btn-modal btn-back-dict"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
-                    <h3 class="dict-title">Dicionário de Dados</h3>
+                    <div class="dict-header">
+                        <button class="btn-modal btn-back-dict"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+                        <h3 class="dict-title">Dicionário de Dados</h3>
+                        <a href="https://data.cnt.org.br" class="btn-modal btn-primary btn-download-dict">Download</a>
+                    </div>
                     <div class="dict-content" id="dynamicDictContent"></div>
                 </div>
             </div>
