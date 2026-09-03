@@ -168,8 +168,12 @@
 
         .sidebar-nav a {
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
             color: var(--text-muted);
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 6px;
             font-size: 14px;
             font-weight: 600;
@@ -182,9 +186,8 @@
         }
 
         .sidebar-nav a.active {
-            background-color: rgba(15, 76, 117, 0.1);
-            color: var(--btn-blue);
-            border-left: 3px solid var(--btn-blue);
+            background-color: var(--btn-blue);
+            color: #ffffff;
         }
 
         @media (max-width: 768px) {
@@ -637,9 +640,9 @@
         <!-- Menu Lateral -->
         <aside class="sidebar">
             <nav class="sidebar-nav">
-                <a href="index.html" class="active">Transporte</a>
-                <a href="combustiveis.html">Combustíveis</a>
-                <a href="emprego.html">Emprego</a>
+                <a href="index.html" class="active"><i class="fa-solid fa-road"></i> Transporte</a>
+                <a href="combustiveis.html"><i class="fa-solid fa-gas-pump"></i> Combustíveis</a>
+                <a href="emprego.html"><i class="fa-solid fa-briefcase"></i> Emprego</a>
             </nav>
         </aside>
 
