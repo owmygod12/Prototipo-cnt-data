@@ -390,13 +390,13 @@
             align-items: center;
             padding: 20px 25px;
             border-bottom: 1px solid var(--border-color);
-            background-color: #f8fafc;
+            background-color: #f1f5f9;
         }
 
         .modal-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--btn-blue);
         }
 
         .btn-close {
@@ -531,15 +531,22 @@
         }
 
         /* Tabela do Dicionário de Dados */
-        .dict-content table th, .dict-content table td {
-            padding: 12px 16px !important;
-            text-align: left;
+        .dict-content table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .dict-content table tbody tr {
+        .dict-content table th, .dict-content table td {
+            padding: 16px 16px !important;
+            text-align: left;
+            border-left: none;
+            border-right: none;
+        }
+        .dict-content table tr {
             border-bottom: 1px solid #e2e8f0 !important;
         }
-        .dict-content table th:nth-child(3), .dict-content table td:nth-child(3) {
-            width: 60% !important;
+        .dict-content table th {
+            color: var(--text-dark);
+            font-weight: 700;
         }
 
         /* Header do Dicionário de Dados */
@@ -547,32 +554,36 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .dict-header .btn-back-dict {
             margin-bottom: 0;
-        }
-        .dict-header .dict-title {
-            margin-bottom: 0;
-            border-bottom: none;
-            padding-bottom: 0;
+            width: auto;
+            justify-content: flex-start;
+            padding: 8px 0;
         }
         .dict-header .btn-download-dict {
             width: auto;
             padding: 8px 16px;
+            border-radius: 4px;
+            background-color: #009e73;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+        }
+        .dict-header .btn-download-dict:hover {
+            opacity: 0.9;
         }
 
         .modal-content.expanded {
             width: 70vw;
             max-width: 1200px;
-            max-height: 80vh;
+            max-height: 90vh;
         }
 
         .modal-view-dictionary {
             overflow-y: auto;
-            max-height: calc(80vh - 65px);
+            max-height: calc(90vh - 80px);
         }
 
         @media (max-width: 768px) {
@@ -710,25 +721,99 @@
                         <p class="card-desc">Dados estatísticos e quantitativos sobre condutores habilitados por categoria, faixa etária e distribuição geográfica nacional.</p>
                     </div>
                     <div class="card-dictionary-data" style="display: none;">
-                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
-                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                        <table>
                             <thead>
-                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                <tr>
                                     <th>Campo</th>
                                     <th>Tipo</th>
                                     <th>Descrição</th>
+                                    <th>Exemplo</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="border-bottom: 1px solid #eee;">
-                                    <td>id</td>
-                                    <td>INT</td>
-                                    <td>Identificador único do registro</td>
+                                <tr>
+                                    <td>data</td>
+                                    <td>DATA</td>
+                                    <td>Data de referência dos dados, indicando o ano ao qual a quantidade de condutores se refere.</td>
+                                    <td>01/12/2011</td>
                                 </tr>
                                 <tr>
-                                    <td>valor</td>
-                                    <td>FLOAT</td>
-                                    <td>Valor aferido</td>
+                                    <td>uf</td>
+                                    <td>TEXTO</td>
+                                    <td>Sigla da Unidade Federativa (UF) associada ao registro, composta por duas letras.</td>
+                                    <td>AC</td>
+                                </tr>
+                                <tr>
+                                    <td>uf_habilitacao_atual</td>
+                                    <td>TEXTO</td>
+                                    <td>Nome do estado correspondente à UF de habilitação atual do condutor.</td>
+                                    <td>São Paulo</td>
+                                </tr>
+                                <tr>
+                                    <td>estado_maps</td>
+                                    <td>TEXTO</td>
+                                    <td>Nome do estado sem acento correspondente à UF de habilitação atual do condutor.</td>
+                                    <td>Sao Paulo</td>
+                                </tr>
+                                <tr>
+                                    <td>regiao_habilitacao_atual</td>
+                                    <td>TEXTO</td>
+                                    <td>Região geográfica do Brasil à qual pertence o estado de habilitação atual do condutor.</td>
+                                    <td>Norte</td>
+                                </tr>
+                                <tr>
+                                    <td>sexo</td>
+                                    <td>TEXTO</td>
+                                    <td>Sexo informado pelo condutor.</td>
+                                    <td>Feminino</td>
+                                </tr>
+                                <tr>
+                                    <td>faixa_etaria</td>
+                                    <td>TEXTO</td>
+                                    <td>Faixa de idade na qual o condutor está classificado.</td>
+                                    <td>26 a 30</td>
+                                </tr>
+                                <tr>
+                                    <td>categoria</td>
+                                    <td>TEXTO</td>
+                                    <td>Categoria da habilitação do condutor, combinada com a descrição da atividade ou tipo de veículo associado.</td>
+                                    <td>C-Condutor Caminhão</td>
+                                </tr>
+                                <tr>
+                                    <td>categoria2</td>
+                                    <td>TEXTO</td>
+                                    <td>Sigla da categoria da Carteira Nacional de Habilitação (CNH) do condutor.</td>
+                                    <td>C</td>
+                                </tr>
+                                <tr>
+                                    <td>categoria3</td>
+                                    <td>TEXTO</td>
+                                    <td>Descrição simplificada da categoria de habilitação ou da atividade correspondente.</td>
+                                    <td>Condutor Caminhão</td>
+                                </tr>
+                                <tr>
+                                    <td>condutores</td>
+                                    <td>DECIMAL</td>
+                                    <td>Quantidade de condutores contabilizados para as características e o período especificados no registro.</td>
+                                    <td>1.0</td>
+                                </tr>
+                                <tr>
+                                    <td>faixa_ordem</td>
+                                    <td>INTEIRO</td>
+                                    <td>Número utilizado para estabelecer a ordem de apresentação das faixas etárias, permitindo sua organização cronológica ou sequencial.</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td>categoria4</td>
+                                    <td>TEXTO</td>
+                                    <td>Classificação padronizada da categoria da CNH, utilizada para agrupamentos e análises.</td>
+                                    <td>C</td>
+                                </tr>
+                                <tr>
+                                    <td>data_de_atualizacao</td>
+                                    <td>DATA</td>
+                                    <td>Data em que os dados foram atualizados pela última vez.</td>
+                                    <td>01/09/2026</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -765,7 +850,6 @@
                 <div class="modal-view-dictionary" style="display: none;">
                     <div class="dict-header">
                         <button class="btn-modal btn-back-dict"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
-                        <h3 class="dict-title">Dicionário de Dados</h3>
                         <a href="https://data.cnt.org.br" class="btn-modal btn-primary btn-download-dict">Download</a>
                     </div>
                     <div class="dict-content" id="dynamicDictContent"></div>
@@ -802,6 +886,8 @@
                 modalContent.classList.remove('expanded');
                 viewActions.style.display = 'flex';
                 viewDictionary.style.display = 'none';
+                const modalTitle = document.getElementById('modalTitle');
+                if (modalTitle) modalTitle.textContent = 'Opções de Acesso ao Dataset';
 
                 setTimeout(() => {
                     closeBtn.focus();
@@ -836,6 +922,8 @@
                     modalContent.classList.add('expanded');
                     viewActions.style.display = 'none';
                     viewDictionary.style.display = 'block';
+                    const modalTitle = document.getElementById('modalTitle');
+                    if (modalTitle) modalTitle.textContent = 'Dicionário de Dados';
                 });
             }
 
@@ -845,6 +933,8 @@
                     modalContent.classList.remove('expanded');
                     viewActions.style.display = 'flex';
                     viewDictionary.style.display = 'none';
+                    const modalTitle = document.getElementById('modalTitle');
+                    if (modalTitle) modalTitle.textContent = 'Opções de Acesso ao Dataset';
                 });
             }
 
