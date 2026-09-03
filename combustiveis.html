@@ -137,6 +137,69 @@
             border-radius: 2px;
         }
 
+        /* Sidebar e Layout do App */
+        .app-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            padding: 0 20px 20px 0;
+            border-right: 1px solid var(--border-color);
+            margin-right: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar-nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background-color: var(--border-color);
+            color: var(--text-dark);
+        }
+
+        .sidebar-nav a.active {
+            background-color: rgba(15, 76, 117, 0.1);
+            color: var(--btn-blue);
+            border-left: 3px solid var(--btn-blue);
+        }
+
+        @media (max-width: 768px) {
+            .app-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                margin-right: 0;
+                margin-bottom: 20px;
+                padding: 0 0 20px 0;
+            }
+        }
+
         /* Container Principal */
         .container {
             max-width: 1200px;
@@ -410,6 +473,77 @@
             word-break: break-all;
         }
 
+        /* Modal - Refatoração para Dicionário e Botões */
+        .modal-view-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .modal-view-dictionary {
+            display: none;
+            width: 100%;
+        }
+
+        .btn-dictionary {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-dictionary:hover {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+        
+        .btn-back-dict {
+            background: none;
+            border: none;
+            color: var(--btn-blue);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 0;
+            font-family: var(--font-family);
+            transition: opacity 0.2s;
+        }
+
+        .btn-back-dict:hover {
+            opacity: 0.8;
+        }
+
+        .dict-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--btn-blue);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .modal-content.expanded {
+            width: 70vw;
+            max-width: 900px;
+            max-height: 80vh;
+        }
+
+        .modal-view-dictionary {
+            overflow-y: auto;
+            max-height: calc(80vh - 65px);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content.expanded {
+                width: 95vw;
+                max-height: 90vh;
+            }
+        }
+
         /* Responsividade */
         @media (max-width: 992px) {
             .content-grid {
@@ -492,17 +626,25 @@
                     <span class="brand-divider"></span>
                     <h1 class="main-title">COMBUSTÍVEIS</h1>
                 </div>
-                <a href="index.html" class="nav-badge">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Ir para Transporte</span>
-                </a>
+                
             </div>
             <div class="main-title-divider"></div>
         </div>
     </header>
 
-    <!-- Container Principal com Blocos Temáticos -->
-    <main class="container">
+    <!-- App Layout Container -->
+    <div class="app-layout">
+        <!-- Menu Lateral -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="index.html">Transporte</a>
+                <a href="combustiveis.html" class="active">Combustíveis</a>
+                <a href="emprego.html">Emprego</a>
+            </nav>
+        </aside>
+
+        <!-- Container Principal com Blocos Temáticos -->
+        <main class="container">
         
         <!-- Bloco 1: COMBUSTÍVEL AEROVIÁRIO (QAV) -->
         <section class="category-block">
@@ -527,6 +669,30 @@
                         <h3 class="card-title">VOLUME DE PRODUÇÃO DO QUEROSENE AEROVIÁRIO</h3>
                         <p class="card-desc">Dados consolidados sobre o volume de refino e fabricação nacional de Querosene de Aviação (QAV-1/QAV).</p>
                     </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </article>
 
                 <!-- Card 2: PREÇO DE IMPORTAÇÃO E EXPORTAÇÃO DO QUEROSENE AEROVIÁRIO -->
@@ -540,6 +706,30 @@
                     <div class="card-body">
                         <h3 class="card-title">PREÇO DE IMPORTAÇÃO E EXPORTAÇÃO DO QUEROSENE AEROVIÁRIO</h3>
                         <p class="card-desc">Indicadores de comércio exterior contemplando valores médios (FOB/US$) e fluxos de importação/exportação de QAV.</p>
+                    </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </article>
 
@@ -555,6 +745,30 @@
                         <h3 class="card-title">VOLUME DE VENDAS DO QUEROSENE AEROVIÁRIO</h3>
                         <p class="card-desc">Volume total de comercialização de QAV pelas distribuidoras autorizadas para abastecimento em aeródromos nacionais.</p>
                     </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </article>
 
                 <!-- Card 4: PREÇO DE VENDA DO QUEROSENE AEROVIÁRIO -->
@@ -568,6 +782,30 @@
                     <div class="card-body">
                         <h3 class="card-title">PREÇO DE VENDA DO QUEROSENE AEROVIÁRIO</h3>
                         <p class="card-desc">Série histórica de preços médios ponderados de venda praticados por produtores e importadores em base semanal.</p>
+                    </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </article>
 
@@ -597,6 +835,30 @@
                         <h3 class="card-title">VOLUME PRODUZIDO</h3>
                         <p class="card-desc">Métricas de produção de Óleo Combustível Marítimo (OCM) e Diesel Marítimo (DMA) destinadas ao setor aquaviário.</p>
                     </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </article>
 
                 <!-- Card 2: VOLUME VENDIDO -->
@@ -611,6 +873,30 @@
                         <h3 class="card-title">VOLUME VENDIDO</h3>
                         <p class="card-desc">Histórico de entregas e vendas de bunker e combustíveis marítimos para navegação de cabotagem e longo curso.</p>
                     </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </article>
 
                 <!-- Card 3: PREÇO DE VENDA -->
@@ -624,6 +910,30 @@
                     <div class="card-body">
                         <h3 class="card-title">PREÇO DE VENDA</h3>
                         <p class="card-desc">Acompanhamento semanal de preços médios de comercialização de combustíveis para o segmento aquaviário nos portos.</p>
+                    </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </article>
 
@@ -653,6 +963,30 @@
                         <h3 class="card-title">VOLUME PRODUZIDO NO PAÍS</h3>
                         <p class="card-desc">Extração nacional diária e mensal de petróleo bruto em campos terrestres (onshore) e marítimos (offshore/pré-sal).</p>
                     </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </article>
 
                 <!-- Card 2: VOLUME PRODUZIDO MUNDIAL -->
@@ -666,6 +1000,30 @@
                     <div class="card-body">
                         <h3 class="card-title">VOLUME PRODUZIDO MUNDIAL</h3>
                         <p class="card-desc">Panorama comparativo da produção global de petróleo por países membros da OPEP e produtores independentes.</p>
+                    </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </article>
 
@@ -681,6 +1039,30 @@
                         <h3 class="card-title">VOLUME DE IMPORTAÇÃO E EXPORTAÇÃO</h3>
                         <p class="card-desc">Balança física e comercial de comércio exterior de petróleo cru, cobrindo fluxos de entrada e saída nos terminais.</p>
                     </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </article>
 
                 <!-- Card 4: VOLUME DE PETRÓLEO PROCESSADO -->
@@ -694,6 +1076,30 @@
                     <div class="card-body">
                         <h3 class="card-title">VOLUME DE PETRÓLEO PROCESSADO</h3>
                         <p class="card-desc">Carga processada nas refinarias nacionais (Fator de Utilização do Refino - FUT) para obtenção de derivados.</p>
+                    </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </article>
 
@@ -709,12 +1115,37 @@
                         <h3 class="card-title">PREÇO MÉDIO DO BARRIL BRENT E WTI</h3>
                         <p class="card-desc">Cotações médias mensais de referência internacional para os barris dos tipos Brent e West Texas Intermediate (WTI).</p>
                     </div>
+                    <div class="card-dictionary-data" style="display: none;">
+                        <p>O dicionário de dados detalha a estrutura, campos e restrições do dataset referente a esta base.</p>
+                        <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #ccc; text-align: left;">
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td>id</td>
+                                    <td>INT</td>
+                                    <td>Identificador único do registro</td>
+                                </tr>
+                                <tr>
+                                    <td>valor</td>
+                                    <td>FLOAT</td>
+                                    <td>Valor aferido</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </article>
 
             </div>
         </section>
 
     </main>
+    </div>
 
     <!-- Modal de Download -->
     <div class="modal-overlay" id="downloadModal">
@@ -726,14 +1157,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <button class="btn-modal btn-primary">
-                    <i class="fa-solid fa-file-csv"></i> Baixar CSV
-                </button>
-                <div class="secondary-action-block">
-                    <button class="btn-modal btn-secondary">
-                        <i class="fa-solid fa-code"></i> Consultar API
+                <div class="modal-view-actions">
+                    <a href="https://data.cnt.org.br" class="btn-modal btn-primary" download>
+                        <i class="fa-solid fa-file-csv"></i> Baixar CSV
+                    </a>
+                    <a href="https://data.cnt.org.br" class="btn-modal btn-secondary" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-code"></i> Consultar BigQuery
+                    </a>
+                    <button class="btn-modal btn-dictionary">
+                        <i class="fa-solid fa-book"></i> Dicionário de Dados
                     </button>
-                    <p class="base-identifier-text" id="modalBaseIdentifier">Base: combustiveis_qav_producao</p>
+                    <p class="base-identifier-text" id="modalBaseIdentifier">Base: dataset</p>
+                </div>
+                <div class="modal-view-dictionary" style="display: none;">
+                    <button class="btn-modal btn-back-dict"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+                    <h3 class="dict-title">Dicionário de Dados</h3>
+                    <div class="dict-content" id="dynamicDictContent"></div>
                 </div>
             </div>
         </div>
@@ -746,13 +1185,28 @@
             const closeBtn = document.getElementById('closeModalBtn');
             const downloadButtons = document.querySelectorAll('.btn-download-overlay');
             const modalBaseIdentifier = document.getElementById('modalBaseIdentifier');
+            const btnDictionary = document.querySelector('.btn-dictionary');
+            const btnBackDict = document.querySelector('.btn-back-dict');
+            const viewActions = document.querySelector('.modal-view-actions');
+            const viewDictionary = document.querySelector('.modal-view-dictionary');
+            const dynamicDictContent = document.getElementById('dynamicDictContent');
+            const modalContent = document.querySelector('.modal-content');
 
             // Abrir Modal e atualizar dinamicamente o nome da base técnica
-            const openModal = (baseName) => {
+            const openModal = (baseName, dictionaryHtml) => {
                 if (modalBaseIdentifier && baseName) {
                     modalBaseIdentifier.textContent = `Base: ${baseName}`;
                 }
+                if (dictionaryHtml) {
+                    dynamicDictContent.innerHTML = dictionaryHtml;
+                }
                 modal.classList.add('active');
+                
+                // Reset do estado do modal para exibir as ações
+                modalContent.classList.remove('expanded');
+                viewActions.style.display = 'flex';
+                viewDictionary.style.display = 'none';
+
                 setTimeout(() => {
                     closeBtn.focus();
                 }, 100);
@@ -761,16 +1215,42 @@
             // Fechar Modal
             const closeModal = () => {
                 modal.classList.remove('active');
+                setTimeout(() => {
+                    modalContent.classList.remove('expanded');
+                    viewActions.style.display = 'flex';
+                    viewDictionary.style.display = 'none';
+                }, 300);
             };
 
             // Evento para todos os botões de Download em qualquer categoria/bloco
             downloadButtons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const baseName = btn.getAttribute('data-base-name') || btn.closest('.card')?.getAttribute('data-base-name');
-                    openModal(baseName);
+                    const card = btn.closest('.card');
+                    const baseName = btn.getAttribute('data-base-name') || card?.getAttribute('data-base-name');
+                    const dictData = card?.querySelector('.card-dictionary-data');
+                    const dictHtml = dictData ? dictData.innerHTML : '<p>Dicionário indisponível.</p>';
+                    openModal(baseName, dictHtml);
                 });
             });
+
+            // Expandir Modal (Mostrar Dicionário)
+            if (btnDictionary) {
+                btnDictionary.addEventListener('click', () => {
+                    modalContent.classList.add('expanded');
+                    viewActions.style.display = 'none';
+                    viewDictionary.style.display = 'block';
+                });
+            }
+
+            // Retrair Modal (Ocultar Dicionário)
+            if (btnBackDict) {
+                btnBackDict.addEventListener('click', () => {
+                    modalContent.classList.remove('expanded');
+                    viewActions.style.display = 'flex';
+                    viewDictionary.style.display = 'none';
+                });
+            }
 
             // Fechar no 'X'
             closeBtn.addEventListener('click', closeModal);
